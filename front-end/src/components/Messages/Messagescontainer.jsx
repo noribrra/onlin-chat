@@ -2,16 +2,15 @@ import Messages from "./Messages";
 import MessageInput from "./MessageInput";
 import { TiMessages } from "react-icons/ti";
 const Messagescontainer = () => {
-  const nochatselectid = true;
+  const nochatselectid = false;
   return (
-    <div className=" flex flex-col md:min-w-[450px]">
+    <div className=" flex flex-col  md:w-[550px] h-screen md:float-right">
       {nochatselectid ? (
         <NochatSeected />
       ) : (
         <>
-          <div className=" bg-slate-500 px-4 py-2 mb-2">
-            <span className=" label-text first-line:">To:</span>
-            <span className=" text-gray-900 font-bold ">nor</span>
+          <div className=" bg-black px-4 py-2 mb-2">
+            <span className=" text-green-800 font-bold ">To Nor</span>
           </div>
 
           <Messages />
