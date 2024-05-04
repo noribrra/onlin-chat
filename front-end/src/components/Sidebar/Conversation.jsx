@@ -1,18 +1,27 @@
-const Conversation = () => {
+import useconversation from "../../store/useconversation";
+
+const Conversation = ({ conversation }) => {
+  const { selectedconversation, setselectconversation } = useconversation();
+  const isselected = selectedconversation?._id === conversation._id;
+
   return (
     <>
-      <div className=" flex gap-2 items-center hover:bg-green-400 rounded p-2 py-1 cursor-pointer">
+      <div
+        className={` flex gap-2 items-center hover:bg-green-400 rounded p-2 py-1 cursor-pointer  ${
+          isselected ? "bg-green-400" : ""
+        } `}
+        onClick={() => {
+          setselectconversation(conversation);
+        }}
+      >
         <div className=" avatar online ">
           <div className=" rounded-full w-12">
-            <img
-              src="https://avatar.iran.liara.run/public/boy?username=n"
-              alt="user aavatar"
-            />
+            <img src={conversation.profilepic} alt="user aavatar" />
           </div>
         </div>
         <div className=" flex flex-col flex-1">
           <div className=" flex gap-3 ">
-            <p className=" text-gray-200 font-bold">noribra</p>
+            <p className=" text-gray-200 font-bold">{conversation.fullname}</p>
           </div>
         </div>
       </div>

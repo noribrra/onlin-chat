@@ -11,7 +11,8 @@ export const singupUser = async (req, res) => {
     }
     const user = await User.findOne({ username });
     if (user) {
-      return res.status(400).json({ error: "user already exists" });
+      res.status(400).json({ error: "user already exists" });
+      return;
     }
 
     // hash passowrd
@@ -30,7 +31,7 @@ export const singupUser = async (req, res) => {
         gender,
         profilepic: gender === "male" ? boyprofilepic : girlprofilepic,
       });
-      await generatetokwnsetcookie(newuser._id, res);
+      generatetokwnsetcookie(newuser._id, res);
       await newuser.save();
 
       res.status(201).json({
