@@ -1,15 +1,26 @@
 import Usegemessages from "../../hooks/Usegemessages";
 import Message from "./Message";
 import Skeletons from "../skeletons/skeletons";
+import { useEffect, useRef } from "react";
 const Messages = () => {
   const { messages, loading } = Usegemessages();
+  const lastmessageref = useRef();
 
+  useEffect(() => {
+    setTimeout(() => {
+      lastmessageref.current?.scrollIntoView({ behavior: "smooth" });
+    }, 0);
+  }, [messages]);
   return (
     <div className=" px-4 flex-1 overflow-auto ">
       {!loading &&
         messages.length > 0 &&
         messages.map((message) => {
-          return <Message key={message._id} ms={message} />;
+          return (
+            <div ref={lastmessageref} key={message._id}>
+              <Message ms={message} />
+            </div>
+          );
         })}
 
       {loading && <Skeletons />}

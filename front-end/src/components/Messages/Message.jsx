@@ -1,6 +1,6 @@
 import { Usercontext } from "../../context/Authcontext";
 import useconversation from "../../store/useconversation";
-
+import extracttime from "../../../utils/extracttime";
 const Message = ({ ms }) => {
   const { authuser } = Usercontext();
   const { selectedconversation } = useconversation();
@@ -12,7 +12,7 @@ const Message = ({ ms }) => {
     : selectedconversation.profilepic;
 
   const bgcolor = fromme ? " bg-green-500" : "bg-blue-300";
-  console.log(ms);
+
   return (
     <div className={` chat ${chatclassname}`}>
       <div className=" chat-image avatar">
@@ -24,7 +24,7 @@ const Message = ({ ms }) => {
         {ms.message}
       </div>
       <div className=" chat-footer opacity-50 text-xs flex gap-1 items-center">
-        12:42
+        {extracttime(ms.createdAt)}
       </div>
     </div>
   );
