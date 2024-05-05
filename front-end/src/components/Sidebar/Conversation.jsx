@@ -1,9 +1,11 @@
+import { Usesocket } from "../../context/socketcontext";
 import useconversation from "../../store/useconversation";
 
 const Conversation = ({ conversation }) => {
+  const { onlinusers } = Usesocket();
   const { selectedconversation, setselectconversation } = useconversation();
   const isselected = selectedconversation?._id === conversation._id;
-
+  const isonlin = onlinusers.includes(conversation._id);
   return (
     <>
       <div
@@ -14,7 +16,7 @@ const Conversation = ({ conversation }) => {
           setselectconversation(conversation);
         }}
       >
-        <div className=" avatar online ">
+        <div className={`avatar ${isonlin ? "online " : ""}`}>
           <div className=" rounded-full w-12">
             <img src={conversation.profilepic} alt="user aavatar" />
           </div>

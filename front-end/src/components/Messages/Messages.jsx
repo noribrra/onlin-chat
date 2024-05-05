@@ -2,10 +2,11 @@ import Usegemessages from "../../hooks/Usegemessages";
 import Message from "./Message";
 import Skeletons from "../skeletons/skeletons";
 import { useEffect, useRef } from "react";
+import Uselistenmessage from "../../hooks/Uselistenmessage";
 const Messages = () => {
   const { messages, loading } = Usegemessages();
   const lastmessageref = useRef();
-
+  Uselistenmessage();
   useEffect(() => {
     setTimeout(() => {
       lastmessageref.current?.scrollIntoView({ behavior: "smooth" });

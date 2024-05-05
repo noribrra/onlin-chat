@@ -1,5 +1,6 @@
 import Conversation from "../models/conversationModel.js";
 import Message from "../models/messageModel.js";
+import { getreciverid, io } from "../socket/socket.js";
 export const sendmessage = async (req, res) => {
   try {
     const { message } = req.body;
@@ -26,8 +27,12 @@ export const sendmessage = async (req, res) => {
     await Conversation.findByIdAndUpdate(conversation._id, {
       $push: { messages: newmessage._id },
     });
+    //  Socket.io
+    const receiversocketid = getreciverid(receiverId);
 
-    // add Socket.io
+    if (receiversocketid) {
+      io.to(receiversocketid).emit("newmessage", newmessage);
+    }
 
     res.status(200).json(newmessage);
   } catch (err) {

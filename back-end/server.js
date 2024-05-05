@@ -5,9 +5,9 @@ import connactTomongdb from "./db/connectTomongodb.js";
 import messageRoute from "./routes/massegeRoute.js";
 import getusersRoute from "./routes/getusersRoute.js";
 import cookieParser from "cookie-parser";
+import { app, server } from "./socket/socket.js";
 dotenv.config();
 
-const app = express();
 const port = process.env.PORT || 5000;
 
 // midelwier
@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
   res.send("nor");
 });
 
-app.listen(port, () => {
+server.listen(port, () => {
   connactTomongdb();
   console.log(`server runing on ${port}`);
 });
